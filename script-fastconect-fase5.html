@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Informações sobre FastConnect</title>
+
+    <!-- Adicione os links do Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 20px auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        h2 {
+            margin-top: 20px;
+        }
+
+        #infoCompleta {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Formulário de Informações sobre FastConnect</h1>
+
+    <div style="max-width: 600px;">
+        <form id="equipamentoForm" class="text-left">
+            <div class="form-group">
+                <label for="nomeEquipamento">Switch ToR:</label>
+                <input type="text" class="form-control" id="nomeEquipamento" required>
+            </div>
+
+            <div class="form-group">
+                <label for="fabricanteEquipamento">Fabricante:</label>
+                <input type="text" class="form-control" id="fabricanteEquipamento" required>
+            </div>
+
+            <div class="form-group">
+                <label for="descricaoprovider">Cloud Provider:</label>
+                <input type="text" class="form-control" id="descricaoprovider" required>
+            </div>
+			
+            <div class="form-group">
+                <label for="CableID">Cable ID:</label>
+                <input type="number" class="form-control" id="CableID" required>
+            </div>
+			
+            <div class="form-group">
+                <label for="ASNbgp">BGP ASN:</label>
+                <input type="number" class="form-control" id="ASNbgp" required>
+            </div>
+
+            <div class="form-group">
+				<label for="PeerBGP">BGP Peer:</label>
+				<input type="text" id="PeerBGP" name="PeerBGP" pattern="\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}" title="Digite um endereço IP válido" placeholder="IP Address" required>
+            </div>
+			
+            <div class="form-group">
+				<label for="VlanID">Vlan ID:</label>
+				<input type="number" id="VlanID" name="VlanID" min="1" max="4095" placeholder="Digite a VLAN ID" required>
+            </div>			
+
+            <button type="button" class="btn btn-success btn-block mt-3" onclick="gerarResumo()">Gerar Resumo</button>
+        </form>
+    </div>
+
+    <h2>Informação Completa:</h2>
+    <div id="infoCompleta"></div>
+</div>
+
+
+
+    <!-- Adicione os scripts do Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        function gerarResumo() {
+            var nomeEquipamento = document.getElementById("nomeEquipamento").value;
+            var descricaoprovider = document.getElementById("descricaoprovider").value;
+            var ASNbgp = document.getElementById("ASNbgp").value;
+            var fabricanteEquipamento = document.getElementById("fabricanteEquipamento").value;
+            var PeerBGP = document.getElementById("PeerBGP").value;            
+            var CableID = document.getElementById("CableID").value;
+            var VlanID = document.getElementById("VlanID").value;			
+
+            var resumo = `
+                <p><strong>Switch ToR:</strong> ${nomeEquipamento}</p>
+                <p><strong>Fabricante:</strong> ${fabricanteEquipamento}</p>
+                <p><strong>Cloud Provider:</strong> ${descricaoprovider}</p>
+                <p><strong>BGP ASN:</strong> ${ASNbgp}</p>
+                <p><strong>BGP Peer:</strong> ${PeerBGP}</p>    
+                <p><strong>Cable ID:</strong> ${CableID}</p>
+				<p><strong>Vlan ID:</strong> ${VlanID}</p>
+            `;
+
+            document.getElementById("infoCompleta").innerHTML = resumo;
+        }
+    </script>
+</body>
+</html>
